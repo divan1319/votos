@@ -17,7 +17,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['reset','resetAll'])
+const emit = defineEmits(['reset'])
 
 const state = reactive({
   total_papeletas:0,
@@ -60,12 +60,6 @@ const sendData = async()=>{
     .catch(()=> toast.error('Error al registrar los votos'))
     .finally(()=> {
       emit('reset')
-      emit('resetAll')
-      state.abstenciones = 0
-      state.entregadas_votantes = 0
-      state.faltantes = 0
-      state.impugnados = 0
-      state.inutilizadas = 0
     })
 }
 

@@ -43,7 +43,7 @@ const searchJRV = async () => {
 const reset = () => {
   state.jrv = null
   state.tipo = null
-  window.location.reload()
+
 };
 
 const refresh = ()=>{

@@ -51,6 +51,7 @@ watchEffect(()=>{
 })
 
 const resetFormState = ()=>{
+    emit('reset')
     formState.jrv = ''
     formState.arena = 0
     formState.nuevas_ideas = 0
@@ -248,6 +249,6 @@ const resetFormState = ()=>{
       </div>
     </div>
     
-    <InfoVotos :votos="formState" :data="props?.data" :editing="props.editing" @reset="resetFormState"  @resetAll="emit('reset')"/>
+    <InfoVotos :votos="formState" :data="props?.data" :editing="props.editing" @reset="resetFormState"/>
   </main>
 </template>
