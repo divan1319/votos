@@ -52,19 +52,22 @@ watchEffect(()=>{
 
 const resetFormState = ()=>{
     emit('reset')
-    formState.jrv = ''
-    formState.arena = 0
-    formState.nuevas_ideas = 0
-    formState.nuestro_tiempo = 0
-    formState.fuerza_solidaria = 0
-    formState.fps = 0
-    formState.vamos = 0
-    formState.cd = 0
-    formState.fmln = 0
-    formState.pcn = 0
-    formState.pdc = 0
-    formState.gana = 0
-    formState.tipo_conteo = null
+    Object.assign(formState,{
+      jrv :'',
+    arena: 0,
+    nuevas_ideas: 0,
+    nuestro_tiempo: 0,
+    fuerza_solidaria: 0,
+    fps: 0,
+    vamos: 0,
+    cd: 0,
+    fmln: 0,
+    pcn: 0,
+    pdc: 0,
+    gana: 0,
+    tipo_conteo: null,
+    })
+
 }
 
 
