@@ -30,7 +30,7 @@ const formState = reactive({
   pcn:0,
   pdc:0,
   gana:0,
-  tipo_conteo:null
+  tipo_conteo:1
 })
 
 watchEffect(()=>{
@@ -50,32 +50,13 @@ watchEffect(()=>{
   formState.tipo_conteo = props?.tipoConteo ?? 1
 })
 
-const resetFormState = ()=>{
-    emit('reset')
-    Object.assign(formState,{
-      jrv :'',
-    arena: 0,
-    nuevas_ideas: 0,
-    nuestro_tiempo: 0,
-    fuerza_solidaria: 0,
-    fps: 0,
-    vamos: 0,
-    cd: 0,
-    fmln: 0,
-    pcn: 0,
-    pdc: 0,
-    gana: 0,
-    tipo_conteo: null,
-    })
-
-}
 
 
 </script>
 <template>
  <main class=" max-h-max md:h-screen">
     
-    <h2 class="text-2xl text-white font-bold text-center py-5">
+    <h2 class="text-2xl  font-bold text-center py-5">
       Registro de votos por JRV
     </h2>
 
@@ -88,7 +69,7 @@ const resetFormState = ()=>{
         >
         <input
           v-model="formState.jrv"
-          :disabled="editing"
+          disabled
           type="number"
           id="first_name"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -252,6 +233,6 @@ const resetFormState = ()=>{
       </div>
     </div>
     
-    <InfoVotos :votos="formState" :data="props?.data" :editing="props.editing" @reset="resetFormState"/>
+    <InfoVotos :votos="formState" :data="props?.data" :editing="props.editing" @reset="emit('reset')"/>
   </main>
 </template>

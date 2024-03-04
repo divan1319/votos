@@ -7,10 +7,10 @@ const isEditing = ref(false);
 const isNew = ref(false);
 const state = reactive({
   jrv: null,
-  tipo: null,
+  tipo: 1,
 });
 const conteoData = ref({});
-
+const jrvInfo = ref({})
 const newRegister = () => {
   isNew.value = true;
 };
@@ -29,8 +29,7 @@ const searchJRV = async () => {
       }else{
         conteoData.value = res.data.jrv
       }
-
-
+      jrvInfo.value = res.data.jrv
       
     })
     .catch((err) => {
@@ -42,8 +41,14 @@ const searchJRV = async () => {
 
 const reset = () => {
   state.jrv = null
-  state.tipo = null
-
+  conteoData.value = {}
+  isEditing.value = false
+  isNew.value = false
+  jrvInfo.value = {}
+  if(state.tipo == 2){
+    state.tipo = 1
+  }
+  
 };
 
 const refresh = ()=>{
@@ -57,7 +62,7 @@ const refresh = ()=>{
     <h2 class="text-center font-bold text-2xl text-white uppercase mt-10 mb-10">
       Buscar JRV
     </h2>
-    <form class="max-w-md md:mx-auto mx-5 mb-7">
+    <form class="max-w-md md:mx-auto mx-5 mb-7" @submit.prevent="searchJRV">
       <div class="flex flex-col">
         <div>
           <label
@@ -89,14 +94,15 @@ const refresh = ()=>{
               v-model="state.jrv"
               type="number"
               id="default-search"
-              class="block w-full p-4 ps-10 text-sm "
+              class="block w-full p-4 ps-10 text-sm focus:"
               placeholder="Número de JRV"
               required
+              
             />
             <button
-              type="button"
+              type="submit"
               class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              @click="searchJRV"
+             
             >
               Buscar
             </button>
@@ -115,11 +121,13 @@ const refresh = ()=>{
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required
             >
-              <option :value="1">Preliminar</option>
+              <option selected :value="1">Preliminar</option>
               <option :value="2">Final</option>
             </select>
           </form>
-
+          <div class=" col-span-2">
+            <h2 class="text-xl font-bold text-center">Centro Votación: <span class="text-cyan-600">{{ jrvInfo.NOMBRE }}</span></h2>
+          </div>
         </div>
       </div>
     </form>

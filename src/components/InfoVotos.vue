@@ -36,7 +36,6 @@ const validationData = () =>{
 }
 
 const sendData = async()=>{
-    let message = props?.editing ? 'Datos Final Guardado' : 'Datos Preliminar Guardado'
     const verify = validationData()
     if(verify){
       toast.error(verify)
@@ -54,7 +53,7 @@ const sendData = async()=>{
 
     await axios.post('http://192.168.15.43:3000/api/registrar-votos-jrv',props.votos)
     .then(()=>{  
-      toast.success(message)
+      toast.success('Datos guardados')
       
     })
     .catch(()=> toast.error('Error al registrar los votos'))
@@ -76,7 +75,7 @@ watchEffect(()=>{
 </script>
 <template>
   <div class="max-h-max">
-    <h2 class="text-2xl text-white font-bold text-center py-5">
+    <h2 class="text-2xl  font-bold text-center py-5">
       Resumen Papeletas
     </h2>
     <div class="grid gap-6 mb-6 md:grid-cols-2 px-5 py-5  max-h-max">
@@ -203,7 +202,7 @@ watchEffect(()=>{
       </div>
     </div>
     <button
-      type="button"
+      type="submit"
       class="text-white w-3/4 md:w-40 mx-12 md:mx-5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-7"
       @click="sendData"
     >
